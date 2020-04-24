@@ -3,37 +3,20 @@
 
 #include <vector>
 #include "SDL.h"
-
-class PacMan
+#include <agent.h>
+class PacMan : public Agent
 {
 public:
-  enum class Direction
-  {
-    kUp,
-    kDown,
-    kLeft,
-    kRight
-  };
-
   PacMan(int grid_width, int grid_height)
-      : grid_width(grid_width),
-        grid_height(grid_height),
-        pos_x(grid_width / 2),
-        pos_y(grid_height / 2) {}
-
-  void Update();
-
-  Direction direction = Direction::kUp;
-
-  const float speed{0.1f};
-  bool alive{true};
-  float pos_x;
-  float pos_y;
+      : Agent{grid_width, grid_height}
+  {
+    Initialize();
+  }
+  void Initialize() override;
+  void Update() override;
 
 private:
   void UpdatePos();
-  int grid_width;
-  int grid_height;
 };
 
 #endif

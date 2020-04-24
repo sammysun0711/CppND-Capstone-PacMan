@@ -4,7 +4,7 @@
 #include <vector>
 #include "SDL.h"
 #include "pacman.h"
-
+#include "ghost.h"
 class Renderer
 {
 public:
@@ -12,7 +12,7 @@ public:
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(PacMan const pacman);
+  void Render(PacMan const &pacman, Ghost const &ghost);
   void UpdateWindowTitle(int score, int fps);
 
 private:

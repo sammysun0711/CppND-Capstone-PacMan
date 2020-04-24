@@ -5,8 +5,8 @@
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
-// #include "snake.h"
 #include "pacman.h"
+#include "ghost.h"
 
 class Game
 {
@@ -18,13 +18,14 @@ public:
 
 private:
   PacMan pacman;
+  Ghost ghost;
   // SDL_Point food;
 
-  std::random_device dev;
-  std::mt19937 engine;
-  std::uniform_int_distribution<int> random_w;
-  std::uniform_int_distribution<int> random_h;
-
+  // std::random_device dev;
+  // std::mt19937 engine;
+  // std::uniform_int_distribution<int> random_w;
+  // std::uniform_int_distribution<int> random_h;
+  // std::uniform_int_distribution<int> random_direction;
   int score{0};
 
   // void PlaceFood();

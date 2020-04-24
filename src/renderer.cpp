@@ -43,7 +43,7 @@ Renderer::~Renderer()
   SDL_Quit();
 }
 
-void Renderer::Render(PacMan const pacman)
+void Renderer::Render(PacMan const &pacman, Ghost const &ghost)
 {
   SDL_Rect block;
   block.w = screen_width / grid_width;
@@ -65,6 +65,19 @@ void Renderer::Render(PacMan const pacman)
   if (pacman.alive)
   {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0x00, 0xFF);
+  }
+  else
+  {
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  }
+  SDL_RenderFillRect(sdl_renderer, &block);
+
+  // Render ghost
+  block.x = static_cast<int>(ghost.pos_x) * block.w;
+  block.y = static_cast<int>(ghost.pos_y) * block.h;
+  if (ghost.alive)
+  {
+    SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF);
   }
   else
   {

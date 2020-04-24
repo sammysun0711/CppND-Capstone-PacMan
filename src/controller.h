@@ -1,7 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-//#include "snake.h"
 #include "pacman.h"
 
 class Controller
