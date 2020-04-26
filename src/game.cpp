@@ -14,12 +14,10 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_start;
   Uint32 frame_end;
   Uint32 frame_duration;
-  int frame_count = 0;
-  bool running = true;
   map.Initialize();
   map.Print();
 
-  while (running)
+  while (running && map.GetCurrentTotalFood() != 0)
   {
     frame_start = SDL_GetTicks();
 
@@ -59,20 +57,17 @@ void Game::Update()
     return;
   pacman.Update(map, score);
   ghost.Update(map, score);
-  // int new_x = static_cast<int>(pacman.pos_x);
-  // int new_y = static_cast<int>(pacman.pos_y);
 
-  // Check if there's food over here
-  /*
-  if (food.x == new_x && food.y == new_y)
+  // Check if pacman collide with any of ghost
+  int p_x = static_cast<int>(pacman.pos_x);
+  int p_y = static_cast<int>(pacman.pos_y);
+  int g_x = static_cast<int>(ghost.pos_x);
+  int g_y = static_cast<int>(ghost.pos_y);
+  if (p_x == g_x && p_y == g_y)
   {
-    score++;
-    // PlaceFood();
-    // Grow snake and increase speed.
-    // snake.GrowBody();
-    // snake.speed += 0.02;
+    pacman.alive = false;
+    running = false;
   }
-  */
 }
 
 int Game::GetScore() const { return score; }

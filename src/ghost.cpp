@@ -34,9 +34,9 @@ void Ghost::Update(Map &map, int &score)
         new_pos_x += speed;
         break;
     }
-
-    Status status = map.GetMapElement(static_cast<int>(new_pos_x),
-                                      static_cast<int>(new_pos_y));
+    int block_x = static_cast<int>(fmod(new_pos_x + grid_width, grid_width));
+    int block_y = static_cast<int>(fmod(new_pos_y + grid_height, grid_height));
+    Status status = map.GetMapElement(block_x, block_y);
     // std::cout << map.ParseStatus(status) << std::endl;
     switch (status)
     {

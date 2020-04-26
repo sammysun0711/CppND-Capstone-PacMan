@@ -38,8 +38,9 @@ void PacMan::Update(Map &map, int &score)
   default:
     break;
   }
-  Status status = map.GetMapElement(static_cast<int>(new_pos_x),
-                                    static_cast<int>(new_pos_y));
+  int block_x = static_cast<int>(fmod(new_pos_x + grid_width, grid_width));
+  int block_y = static_cast<int>(fmod(new_pos_y + grid_height, grid_height));
+  Status status = map.GetMapElement(block_x, block_y);
   // std::cout << map.ParseStatus(status) << std::endl;
   switch (status)
   {
@@ -51,7 +52,9 @@ void PacMan::Update(Map &map, int &score)
     break;
   case Status::kFood:
     // std::cout << "[kFood] prev position [" << pos_x << "," << pos_y << "]\n";
-    map.SetMapElement(pos_x, pos_y, Status::kFree);
+    // map.SetMapElement(static_cast<int>(new_pos_x), static_cast<int>(new_pos_y), Status::kFree);
+    map.SetMapElement(block_x, block_y, Status::kFree);
+    map.DecreaseTotalFood();
     UpdatePos(new_pos_x, new_pos_y);
     // std::cout << "[kFood] new  position [" << pos_x << "," << pos_y << "]\n";
     score++;
