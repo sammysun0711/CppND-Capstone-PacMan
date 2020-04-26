@@ -1,6 +1,6 @@
 #ifndef AGENT_H
 #define AGENT_H
-
+#include <map.h>
 class Agent
 {
 public:
@@ -15,9 +15,9 @@ public:
         : grid_width(grid_width),
           grid_height(grid_height) {}
     virtual void Initialize() = 0;
-    virtual void Update() = 0;
+    virtual void Update(Map &map, int &score) = 0;
 
-    Direction direction = Direction::kUp;
+    Direction direction = Direction::kDown;
     const float speed{0.1f};
     float pos_x;
     float pos_y;
