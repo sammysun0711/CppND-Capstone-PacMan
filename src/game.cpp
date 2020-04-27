@@ -66,54 +66,17 @@ void Game::Update()
 {
   if (!pacman.IsAlive())
     return;
-  pacman.Update(map, score, frame_count);
+  pacman.Move(map, score, frame_count);
 
   for (auto &ghost : ghosts)
   {
-    if (pacman.IsPowered())
-    {
-      ghost.SetFrighten(map);
-    }
-    else
-    {
-      if (ghost.IsEaten())
-      {
-        ghost.MoveTowardPen(map);
-      }
-      else
-      {
-        ghost.ResumePrevMode();
-        ghost.getTarget(pacman);
-        ghost.MoveTowardTarget(map);
-      }
-    }
-    ghost.Update(map);
+    ghost.Move(pacman, map);
   }
 
   // Check if pacman collide with any of ghost
-  int p_x = static_cast<int>(pacman.pos_x);
-  int p_y = static_cast<int>(pacman.pos_y);
-
   for (Ghost &ghost : ghosts)
   {
-    int g_x = static_cast<int>(ghost.pos_x);
-    int g_y = static_cast<int>(ghost.pos_y);
-    if (p_x == g_x && p_y == g_y)
-    {
-      if (pacman.IsPowered())
-      {
-        ghost.SetDeath();
-      }
-      else
-      {
-        if (!ghost.IsEaten())
-        {
-          pacman.SetDeath();
-          running = false;
-          return;
-        }
-      }
-    }
+    pacman.CheckCollision(ghost, running, score);
   }
 }
 
