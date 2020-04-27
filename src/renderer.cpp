@@ -80,7 +80,7 @@ void Renderer::Render(PacMan const &pacman, std::vector<Ghost> &ghosts, Map cons
           }
         }
         break;
-      case Status::kSpecial:
+      case Status::kPill:
         SDL_SetRenderDrawColor(sdl_renderer, 0x89, 0xC4, 0xF4, 0xFF); // Jordy Blue
         for (int l = i * block.w + block.w / 4; l < i * block.w + 3 * block.w / 4; l++)
         {
@@ -115,7 +115,7 @@ void Renderer::Render(PacMan const &pacman, std::vector<Ghost> &ghosts, Map cons
   }
   SDL_RenderFillRect(sdl_renderer, &block);
 
-  // Render ghost
+  // Render ghosts
   for (Ghost const &ghost : ghosts)
   {
     block.x = static_cast<int>(ghost.pos_x) * block.w;

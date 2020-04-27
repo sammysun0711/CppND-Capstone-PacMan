@@ -38,7 +38,7 @@ void Map::Initialize()
                 col++;
                 break;
             case 'O':
-                SetMapElement(col, row, Status::kSpecial);
+                SetMapElement(col, row, Status::kPill);
                 IncreaseTotalFood();
                 col++;
                 break;
@@ -76,7 +76,7 @@ char Map::ParseStatus(Status const &status) const
     case Status::kFood:
         return 'o';
         break;
-    case Status::kSpecial:
+    case Status::kPill:
         return 'O';
         break;
     case Status::kWall:

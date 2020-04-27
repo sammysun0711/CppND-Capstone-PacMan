@@ -56,7 +56,7 @@ void PacMan::Move(Map &map, int &score, int frame_counter)
     UpdatePos(new_pos_x, new_pos_y);
     score += 10;
     break;
-  case Status::kSpecial:
+  case Status::kPill:
     map.SetMapElement(block_x, block_y, Status::kFree);
     map.DecreaseTotalFood();
     UpdatePos(new_pos_x, new_pos_y);

@@ -8,7 +8,7 @@ enum class Status
 {
     kFree,
     kFood,
-    kSpecial,
+    kPill,
     kWall,
 };
 
@@ -41,7 +41,7 @@ public:
     /**
      * Parse status as a char
      * @param status reference to a status instance
-     * @return a char for corresponding status, posible char 'W': Wall, 'o': Food, 'O': Pils, 'u': Free
+     * @return a char for corresponding status, posible char 'W': Wall, 'o': Food, 'O': Pill, 'u': Free
      */
     char ParseStatus(Status const &status) const;
 

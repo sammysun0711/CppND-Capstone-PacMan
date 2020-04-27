@@ -392,7 +392,7 @@ void Ghost::Update(Map const &map)
     case Status::kFood:
         UpdatePos(new_pos_x, new_pos_y);
         break;
-    case Status::kSpecial:
+    case Status::kPill:
         UpdatePos(new_pos_x, new_pos_y);
         break;
     case Status::kWall:
