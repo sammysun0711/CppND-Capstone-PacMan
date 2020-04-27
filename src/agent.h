@@ -16,7 +16,7 @@ public:
           grid_height(grid_height) {}
     virtual void Initialize() = 0;
 
-    Direction currentDir = Direction::kRight;
+    Direction currentDir = Direction::kUp;
     float speed{0.1f};
     float pos_x;
     float pos_y;

@@ -6,7 +6,9 @@ Map::Map(int grid_width, int grid_height)
     : grid_width(grid_width), grid_height(grid_height)
 {
     map.resize(grid_width, std::vector<Status>(grid_height));
-    file.open("../map/map_new.txt");
+    file.open("../map/maze.txt");
+    std::cout << "file is open: "
+              << file.is_open() << "\n";
 }
 
 Map::~Map()
@@ -29,21 +31,21 @@ void Map::Initialize()
             switch (word)
             {
             case 'u':
-                SetMapElement(row, col, Status::kFree);
+                SetMapElement(col, row, Status::kFree);
                 col++;
                 break;
             case 'o':
-                SetMapElement(row, col, Status::kFood);
+                SetMapElement(col, row, Status::kFood);
                 IncreaseTotalFood();
                 col++;
                 break;
             case 'O':
-                SetMapElement(row, col, Status::kSpecial);
+                SetMapElement(col, row, Status::kSpecial);
                 IncreaseTotalFood();
                 col++;
                 break;
             case 'W':
-                SetMapElement(row, col, Status::kWall);
+                SetMapElement(col, row, Status::kWall);
                 col++;
                 break;
             default:
