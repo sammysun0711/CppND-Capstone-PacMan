@@ -54,7 +54,7 @@ void Map::Initialize()
     }
 }
 
-void Map::Print()
+void Map::Print() const
 {
     for (int i = 0; i < grid_width; i++)
     {
@@ -66,7 +66,7 @@ void Map::Print()
     }
 }
 
-char Map::ParseStatus(Status status)
+char Map::ParseStatus(Status const &status) const
 {
     switch (status)
     {

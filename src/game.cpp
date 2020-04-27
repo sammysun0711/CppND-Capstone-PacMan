@@ -26,7 +26,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_end;
   Uint32 frame_duration;
   map.Initialize();
-  map.Print();
+  // map.Print();
 
   while (running && map.GetCurrentTotalFood() != 0)
   {
