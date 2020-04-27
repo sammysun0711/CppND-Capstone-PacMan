@@ -12,9 +12,7 @@ enum class Mode
     kChase,
     kScatter,
     kFrighten,
-    kLeave,
     kDeath,
-    kPen
 };
 
 enum class Colour
@@ -35,6 +33,7 @@ public:
     {
         Initialize();
     }
+
     // Classical Behaviour
     void Initialize() override;
     void Move(PacMan const &pacman, Map const &map);
