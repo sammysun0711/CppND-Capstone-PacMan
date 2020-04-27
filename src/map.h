@@ -8,17 +8,23 @@ enum class Status
 {
     kFree,
     kFood,
-    kWall
+    kSpecial,
+    kWall,
 };
 
 class Map
 {
 public:
+    // Constructor / Deconstructor
     Map(int grid_width, int grid_height);
     ~Map();
+
+    // Classical Behaviour
     void Initialize();
     void Print();
-    int ParseStatus(Status status);
+    char ParseStatus(Status status);
+
+    // Getter / Setter
     Status GetMapElement(int i, int j) const;
     void SetMapElement(int i, int j, Status status);
     int GetCurrentTotalFood() const { return total_food; }

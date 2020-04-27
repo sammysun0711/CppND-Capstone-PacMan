@@ -5,7 +5,7 @@
 
 void Controller::ChangeDirection(PacMan &pacman, PacMan::Direction input) const
 {
-  pacman.direction = input;
+  pacman.currentDir = input;
 }
 
 void Controller::HandleInput(bool &running, PacMan &pacman) const

@@ -6,15 +6,15 @@
 
 void PacMan::Initialize()
 {
-  pos_x = static_cast<int>(grid_width / 2);
-  pos_y = static_cast<int>(grid_height / 2);
+  pos_x = 9.0f;
+  pos_y = 16.0f;
 }
 
 void PacMan::Update(Map &map, int &score)
 {
   float new_pos_x = pos_x;
   float new_pos_y = pos_y;
-  switch (direction)
+  switch (currentDir)
   {
   case Direction::kUp:
     // std::cout << "kUp\n";
@@ -60,6 +60,10 @@ void PacMan::Update(Map &map, int &score)
     score++;
     // map.SetMapElement(new_pos_x, new_pos_y, Status::kFree);
     break;
+  case Status::kSpecial:
+    map.SetMapElement(block_x, block_y, Status::kFree);
+    map.DecreaseTotalFood();
+    UpdatePos(new_pos_x, new_pos_y);
   case Status::kWall:
     // UpdatePos(prev_pos_x, prev_pos_y);
     // std::cout << "[kWall] prev position [" << pos_x << "," << pos_y << "]\n";

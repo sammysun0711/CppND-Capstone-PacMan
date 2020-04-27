@@ -3,9 +3,20 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : pacman(grid_width, grid_height),
-      ghost(grid_width, grid_height),
-      map(grid_width, grid_height) {}
+    : grid_width(grid_width), grid_height(grid_height),
+      pacman(grid_width, grid_height),
+      map(grid_width, grid_height)
+{
+  Initialize();
+}
+
+void Game::Initialize()
+{
+  for (int i = 0; i < 4; i++)
+  {
+    ghosts.emplace_back(Ghost(grid_width, grid_height, Colour(i)));
+  }
+}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration)
@@ -16,6 +27,10 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   map.Initialize();
   map.Print();
+  for (auto &ghost : ghosts)
+  {
+    ghost.Reset();
+  }
 
   while (running && map.GetCurrentTotalFood() != 0)
   {
@@ -24,7 +39,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, pacman);
     Update();
-    renderer.Render(pacman, ghost, map);
+    renderer.Render(pacman, ghosts, map);
 
     frame_end = SDL_GetTicks();
 
@@ -56,17 +71,26 @@ void Game::Update()
   if (!pacman.alive)
     return;
   pacman.Update(map, score);
-  ghost.Update(map, score);
+  for (auto &ghost : ghosts)
+  {
+    ghost.getTarget(pacman);
+    ghost.MoveTowardTarget(map);
+    ghost.Update(map, score);
+  }
 
   // Check if pacman collide with any of ghost
   int p_x = static_cast<int>(pacman.pos_x);
   int p_y = static_cast<int>(pacman.pos_y);
-  int g_x = static_cast<int>(ghost.pos_x);
-  int g_y = static_cast<int>(ghost.pos_y);
-  if (p_x == g_x && p_y == g_y)
+  for (Ghost const &ghost : ghosts)
   {
-    pacman.alive = false;
-    running = false;
+    int g_x = static_cast<int>(ghost.pos_x);
+    int g_y = static_cast<int>(ghost.pos_y);
+    if (p_x == g_x && p_y == g_y)
+    {
+      pacman.alive = false;
+      running = false;
+      return;
+    }
   }
 }
 
