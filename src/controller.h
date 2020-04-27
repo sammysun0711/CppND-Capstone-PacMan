@@ -6,10 +6,20 @@
 class Controller
 {
 public:
+    /**
+     * Get keyboard input and set current direction of pacman based on keyboard input
+     * @param running indicate whether game is continue
+     * @param pacman reference to a PacMan instance
+     */
     void HandleInput(bool &running, PacMan &pacman) const;
 
 private:
-    void ChangeDirection(PacMan &pacman, PacMan::Direction input) const;
+    /**
+     * Change current direction of pacman based on keyboard
+     * @param pacman reference to a PacMan instance
+     * @param input keyboard input direction
+     */
+    void ChangeDirection(PacMan &pacman, Agent::Direction input) const;
 };
 
 #endif

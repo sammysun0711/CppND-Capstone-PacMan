@@ -11,9 +11,17 @@ public:
         kLeft,
         kRight
     };
+    /**
+     * Agent Constructor
+     * @param grid_width set width of map
+     * @param grid_height set height of map
+     */
     Agent(size_t grid_width, size_t grid_height)
         : grid_width(grid_width),
           grid_height(grid_height) {}
+    /**
+     * Initialize agent, must be inmplemented in child class
+     */
     virtual void Initialize() = 0;
     /**
      * Update position consider period of map at portal
@@ -32,9 +40,5 @@ public:
     float pos_y;
     size_t grid_width;
     size_t grid_height;
-
-private:
-    // int grid_width;
-    // int grid_height;
 };
 #endif // AGENT_H
