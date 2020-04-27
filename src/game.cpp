@@ -64,7 +64,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 void Game::Update()
 {
-  if (!pacman.alive)
+  if (!pacman.IsAlive())
     return;
   pacman.Update(map, score, frame_count);
 

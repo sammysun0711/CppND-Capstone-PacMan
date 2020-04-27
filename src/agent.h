@@ -15,12 +15,10 @@ public:
         : grid_width(grid_width),
           grid_height(grid_height) {}
     virtual void Initialize() = 0;
-
     Direction currentDir = Direction::kUp;
     float speed{0.1f};
     float pos_x;
     float pos_y;
-    bool alive{true};
     size_t grid_width;
     size_t grid_height;
 
