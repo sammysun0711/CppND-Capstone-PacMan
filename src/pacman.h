@@ -33,7 +33,6 @@ public:
 
 private:
   // Classical Behaviour
-  void UpdatePos(float new_pos_x, float new_pos_y);
 
   // Member Variable
   bool powered{false};
