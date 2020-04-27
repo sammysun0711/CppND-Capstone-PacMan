@@ -6,10 +6,40 @@
 #include "map.h"
 void Ghost::Initialize()
 {
-    // pos_x = random_w(engine);
-    // pos_y = random_h(engine);
-    // pos_x = 14.0f;
-    // pos_y = 14.0f;
+    switch (ghost_colour)
+    {
+    case Colour::kRed:
+        pos_x = 13.5f;
+        pos_y = 19.0f;
+        currentDir = Direction::kLeft;
+        mode = Mode::kScatter;
+        prev_mode = Mode::kScatter;
+        break;
+    case Colour::kBlue:
+        pos_x = 11.5f;
+        pos_y = 16.0f;
+        currentDir = Direction::kRight;
+        mode = Mode::kChase;
+        prev_mode = Mode::kChase;
+        break;
+    case Colour::kYellow:
+        pos_x = 15.0f;
+        pos_y = 15.0f;
+        currentDir = Direction::kDown;
+        mode = Mode::kScatter;
+        prev_mode = Mode::kScatter;
+        break;
+    case Colour::kPink:
+        pos_x = 13.0f;
+        pos_y = 15.5f;
+        currentDir = Direction::kUp;
+        mode = Mode::kChase;
+        prev_mode = Mode::kChase;
+        break;
+    default:
+        break;
+    }
+    eaten = false;
 }
 void Ghost::getTarget(PacMan pacman)
 {
@@ -110,45 +140,15 @@ void Ghost::getTarget(PacMan pacman)
     }
 }
 
-void Ghost::Reset()
-{
-    switch (ghost_colour)
-    {
-    case Colour::kRed:
-        pos_x = 13.5f;
-        pos_y = 19.0f;
-        currentDir = Direction::kLeft;
-        mode = Mode::kScatter;
-        break;
-    case Colour::kBlue:
-        pos_x = 11.5f;
-        pos_y = 16.0f;
-        currentDir = Direction::kRight;
-        mode = Mode::kChase;
-        break;
-    case Colour::kYellow:
-        pos_x = 15.0f;
-        pos_y = 15.0f;
-        currentDir = Direction::kDown;
-        mode = Mode::kScatter;
-        break;
-    case Colour::kPink:
-        pos_x = 13.0f;
-        pos_y = 15.5f;
-        currentDir = Direction::kUp;
-        mode = Mode::kChase;
-        break;
-    default:
-        break;
-    }
-    eaten = false;
-}
-
 void Ghost::SetSpeed()
 {
     if (mode == Mode::kFrighten)
     {
         speed = 0.05f;
+    }
+    else if (mode == Mode::kDeath)
+    {
+        speed = 0.2f;
     }
     else
     {
@@ -265,13 +265,31 @@ void Ghost::CornerHandle(Map &map)
         }
     }
 }
-
-void Ghost::Update(Map &map, int &score)
+void Ghost::SetFrighten(Map &map)
 {
+    // prev_mode = mode;
+    mode = Mode::kFrighten;
+    CornerHandle(map);
+}
+
+void Ghost::ResumePrevMode()
+{
+    mode = prev_mode;
+    eaten = false;
+}
+
+void Ghost::SetDeath()
+{
+    eaten = true;
+    mode = Mode::kDeath;
+}
+
+void Ghost::Update(Map &map)
+{
+    SetSpeed();
     float new_pos_x = pos_x;
     float new_pos_y = pos_y;
     //direction = Direction(random_direction(engine));
-
     switch (currentDir)
     {
     case Direction::kUp:

@@ -27,10 +27,6 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   map.Initialize();
   map.Print();
-  for (auto &ghost : ghosts)
-  {
-    ghost.Reset();
-  }
 
   while (running && map.GetCurrentTotalFood() != 0)
   {
@@ -70,26 +66,46 @@ void Game::Update()
 {
   if (!pacman.alive)
     return;
-  pacman.Update(map, score);
+  pacman.Update(map, score, frame_count);
+
   for (auto &ghost : ghosts)
   {
-    ghost.getTarget(pacman);
-    ghost.MoveTowardTarget(map);
-    ghost.Update(map, score);
+    if (pacman.IsPowered())
+    {
+      ghost.SetFrighten(map);
+    }
+    else
+    {
+      ghost.ResumePrevMode();
+      ghost.getTarget(pacman);
+      ghost.MoveTowardTarget(map);
+    }
+    ghost.Update(map);
   }
 
   // Check if pacman collide with any of ghost
   int p_x = static_cast<int>(pacman.pos_x);
   int p_y = static_cast<int>(pacman.pos_y);
-  for (Ghost const &ghost : ghosts)
+
+  for (Ghost &ghost : ghosts)
   {
     int g_x = static_cast<int>(ghost.pos_x);
     int g_y = static_cast<int>(ghost.pos_y);
     if (p_x == g_x && p_y == g_y)
     {
-      pacman.alive = false;
-      running = false;
-      return;
+      if (pacman.IsPowered())
+      {
+        ghost.SetDeath();
+      }
+      else
+      {
+        if (!ghost.IsEaten())
+        {
+          pacman.SetDeath();
+          running = false;
+          return;
+        }
+      }
     }
   }
 }

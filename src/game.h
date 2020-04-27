@@ -26,8 +26,8 @@ private:
   size_t grid_height;
   int frame_count = 0;
   bool running = true;
-  int score{0};
 
+  int score{0};
   void Update();
 };
 

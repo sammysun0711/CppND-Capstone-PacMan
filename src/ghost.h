@@ -37,13 +37,17 @@ public:
     }
     // Classical Behaviour
     void Initialize() override;
-    void Reset();
     void getTarget(PacMan pacman);
     void CornerHandle(Map &map);
     void MoveTowardTarget(Map &map);
-    void Update(Map &map, int &score) override;
+    void Update(Map &map);
     // Getter / Setter
     Colour GetColour() const { return ghost_colour; }
+    Mode GetMode() const { return mode; }
+    void SetDeath();
+    void SetFrighten(Map &map);
+    void ResumePrevMode();
+    bool IsEaten() const { return eaten; }
 
 private:
     // Classical Behaviour
@@ -63,6 +67,7 @@ private:
     void SetSpeed();
 
     Mode mode = Mode::kChase;
+    Mode prev_mode = Mode::kChase;
     Colour ghost_colour = Colour::kRed;
     SDL_Point target;
     bool eaten;
