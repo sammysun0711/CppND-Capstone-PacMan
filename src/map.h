@@ -16,13 +16,13 @@ class Map
 {
 public:
     // Constructor / Deconstructor
-    Map(int grid_width, int grid_height);
+    Map(int grid_width, int grid_height, std::string filename);
     ~Map();
 
     // Classical Behaviour
     void Initialize();
-    void Print();
-    char ParseStatus(Status status);
+    void Print() const;
+    char ParseStatus(Status const &status) const;
 
     // Getter / Setter
     Status GetMapElement(int i, int j) const;

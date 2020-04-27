@@ -12,7 +12,7 @@
 class Game
 {
 public:
-  Game(std::size_t grid_width, std::size_t grid_height);
+  Game(std::size_t grid_width, std::size_t grid_height, std::string filename);
   void Initialize();
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
@@ -26,7 +26,6 @@ private:
   size_t grid_height;
   int frame_count = 0;
   bool running = true;
-
   int score{0};
   void Update();
 };
