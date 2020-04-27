@@ -76,9 +76,16 @@ void Game::Update()
     }
     else
     {
-      ghost.ResumePrevMode();
-      ghost.getTarget(pacman);
-      ghost.MoveTowardTarget(map);
+      if (ghost.IsEaten())
+      {
+        ghost.MoveTowardPen(map);
+      }
+      else
+      {
+        ghost.ResumePrevMode();
+        ghost.getTarget(pacman);
+        ghost.MoveTowardTarget(map);
+      }
     }
     ghost.Update(map);
   }

@@ -275,7 +275,10 @@ void Ghost::SetFrighten(Map &map)
 void Ghost::ResumePrevMode()
 {
     mode = prev_mode;
-    eaten = false;
+    if (InPen())
+    {
+        eaten = false;
+    }
 }
 
 void Ghost::SetDeath()
@@ -284,12 +287,65 @@ void Ghost::SetDeath()
     mode = Mode::kDeath;
 }
 
+void Ghost::MoveTowardPen(Map &map)
+{
+    if (GetGhostX() <= 13.55 && GetGhostX() >= 13.45 && GetGhostY() >= 15.5f && GetGhostY() <= 20.0f)
+    {
+        MoveInPen(map);
+    }
+    else
+    {
+        target = {14, 15};
+        MoveTowardTarget(map);
+    }
+    Update(map);
+}
+
+bool Ghost::InPen()
+{
+    if (GetGhostX() <= 13.00 && GetGhostX() >= 15.00 && GetGhostY() >= 14.0f && GetGhostY() <= 17.0f)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+void Ghost::MoveInPen(Map &map)
+{
+    // Initially check they have the correct X coordinates
+    if (GetGhostX() <= 13.55 && GetGhostX() >= 13.45)
+    {
+        if (GetGhostY() >= 18.95f)
+        {
+            currentDir = Direction::kDown;
+        }
+        else if (GetGhostY() <= 17.0f)
+        {
+            mode = Mode::kLeave;
+        }
+    }
+    else
+    {
+        // If they dont have the correct x coordinate
+        // Determine if they need to move left or right
+        if (GetGhostX() < 13.5f)
+        {
+            currentDir = Direction::kRight;
+        }
+        else if (GetGhostX() > 13.5f)
+        {
+            currentDir = Direction::kLeft;
+        }
+    }
+}
+
 void Ghost::Update(Map &map)
 {
     SetSpeed();
     float new_pos_x = pos_x;
     float new_pos_y = pos_y;
-    //direction = Direction(random_direction(engine));
     switch (currentDir)
     {
     case Direction::kUp:

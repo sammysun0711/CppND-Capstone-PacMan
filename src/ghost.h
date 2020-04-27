@@ -40,6 +40,8 @@ public:
     void getTarget(PacMan pacman);
     void CornerHandle(Map &map);
     void MoveTowardTarget(Map &map);
+    void MoveTowardPen(Map &map);
+    void MoveInPen(Map &map);
     void Update(Map &map);
     // Getter / Setter
     Colour GetColour() const { return ghost_colour; }
@@ -58,6 +60,8 @@ private:
     int CheckJuncs(Map &map);
     bool IsAtCenter();
     float CalcDistance(int x, int y);
+    bool InPen();
+
     // Getter / Setter
     float GetGhostX() const { return pos_x; }
     float GetGhostY() const { return pos_y; }
