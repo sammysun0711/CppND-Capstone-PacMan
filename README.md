@@ -1,12 +1,8 @@
 # CPPND: Capstone PacMan Game Example
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+This is a repository for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://engineering.purdue.edu/OOSD/F2009/Assignments/IPA/pacman.html) excellent instruction and [this](https://github.com/tkilminster/pacman) repository.
 
-<img src="snake_game.gif"/>
-
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
-
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+<img src="pacman.gif"/>
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -28,4 +24,31 @@ In this project, you can build your own C++ application or extend this Snake gam
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./PacMan`.
+4. Run it with user defined maze: `./PacMan path-to-maze-file`.
+5. Run it with default maze: `./PacMan`.
+
+## Software Architecure
+The software architecure of project is shown as follows:
+<img src="images/pacman_uml.png"/>
+
+## Matched Project Rubric
+The matched project rubric is shown as follows:
+
+### Loops, Functions, I/O
+| Criteria | Meets Specifications |
+| -------- | -------------------- |
+| The project demonstrates an understanding of C++ functions and control structures.             | All function are enclusption into class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| The project reads data from a file and process the data, or the program writes data to a file. | Path of map file can be load to initalize local file (map.cpp line 17 - 55) |
+| The project accepts user input and processes the input.                                        | Path of map file can be given to Program via comandline (main.cpp line 15 - 24). |
+
+### Object Oriented Programming
+| Criteria | Meets Specifications |
+| -------- | -------------------- |
+|The project uses Object Oriented Programming techniques. | class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| Classes use appropriate access specifiers for class members. | class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| Class constructors utilize member initialization
+lists.                                       | Class Game, Agent, Map |
+| Classes abstract implementation details from their interfaces.| Documentation in class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| Classes follow an appropriate inheritance hierarchy. | class PacMan and Ghost inherited from class Agent |
+| Overloaded functions allow the same function to operate on different parameters.| pacman.cpp Intialize() override line 31, ghost.cpp Initialize() override line 48|
+| Derived class functions override virtual base class functions.| pacman.cpp Intialize() override line 31, ghost.cpp Initialize() override line 48|
