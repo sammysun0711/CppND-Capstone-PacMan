@@ -2,7 +2,7 @@
 
 This is a repository for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://engineering.purdue.edu/OOSD/F2009/Assignments/IPA/pacman.html) excellent instruction and [this](https://github.com/tkilminster/pacman) repository.
 
-<img src="pacman.gif"/>
+<img src="images/pacman.gif"/>
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
