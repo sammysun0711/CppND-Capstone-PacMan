@@ -71,11 +71,7 @@ void Game::Update()
   for (auto &ghost : ghosts)
   {
     ghost.Move(pacman, map);
-  }
-
-  // Check if pacman collide with any of ghost
-  for (Ghost &ghost : ghosts)
-  {
+    // Check if pacman collide with any of ghost
     pacman.CheckCollision(ghost, running, score);
   }
 }
