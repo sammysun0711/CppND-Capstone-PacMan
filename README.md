@@ -24,12 +24,6 @@ This is a repository for the Capstone project in the [Udacity C++ Nanodegree Pro
 - kFrighten: Ghost will slow down and vulnerable when PacMan eats pill
 - kDeath: Ghost be eaten by PacMan when Ghost in kFrighten mode
 
-### Available Movement
-- kUp
-- kDown
-- kLeft
-- kDown
-
 ## How to Play
 - Keyboard Up: Move Up
 - Keyboard Down: Move Down
@@ -69,17 +63,23 @@ The matched project rubric is shown as follows:
 ### Loops, Functions, I/O
 | Criteria | Meets Specifications |
 | -------- | -------------------- |
-| The project demonstrates an understanding of C++ functions and control structures. | All function are enclusption into class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| The project demonstrates an understanding of C++ functions and control structures. | The project is clearly organized into function in class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
 | The project reads data from a file and process the data, or the program writes data to a file. | Path of map file can be load to initalize local file (map.cpp line 17 - 55) |
 | The project accepts user input and processes the input. | Path of map file can be given to Program via comandline (main.cpp line 15 - 24). |
 
 ### Object Oriented Programming
 | Criteria | Meets Specifications |
 | -------- | -------------------- |
-|The project uses Object Oriented Programming techniques. | class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
-| Classes use appropriate access specifiers for class members. | class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
-| Class constructors utilize member initialization lists. | Class Game, Agent, Map |
-| Classes abstract implementation details from their interfaces.| Documentation in class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| The project uses Object Oriented Programming techniques. | class Game, Agent, PacMan, Ghost, Controller, Map, Renderer is used|
+| Classes use appropriate access specifiers for class members. | Access to all class data member are explicitly specified as public, private in class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| Class constructors utilize member initialization lists. | Class Game, Agent, Map, Renderer |
+| Classes abstract implementation details from their interfaces.| Formal Documentation in head file of class Game, Agent, PacMan, Ghost, Controller, Map, Renderer |
+| Classes encapsulate behavior. | Appropriate data and functions are grouped into classes. Member data that is subject to an invariant is hidden from the user. State is accessed via member functions. Example class Game.
 | Classes follow an appropriate inheritance hierarchy. | class PacMan and Ghost inherited from class Agent |
-| Overloaded functions allow the same function to operate on different parameters.| pacman.cpp Intialize() override line 31, ghost.cpp Initialize() override line 48|
 | Derived class functions override virtual base class functions.| pacman.cpp Intialize() override line 31, ghost.cpp Initialize() override line 48|
+
+### Memory Management
+
+| Criteria | Meets Specifications |
+| -------- | -------------------- |
+|The project makes use of references in function declarations.| example ghost.h method Move() line 54, map.h method ParseStatus() line 46 |
